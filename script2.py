@@ -18,19 +18,23 @@ df_test = df_test.fillna(-1)
 
 #Cleaning data: age
 av = df_test.age.values
-df_test['age'] = np.where(np.logical_or(av<12, av>80), -1, av)
+df_test['age'] = np.where(np.logical_or(av<12, av>85), -1, av)
 
 ids = []
 cities = []
 for i in range(len(id_test)):
 	ids.append(id_test[i])
 	ids.append(id_test[i])
-	if df_test["language"][i] == "en":
-		cities.append("US")
+	if df_test["age"][i] == "-1":
 		cities.append("NDF")
+		if df_test["language"][i]=="us":
+			cities.append("US")
+		else:
+			cities.append("other")
+		
 	else:
 		cities.append("NDF")
-		cities.append("other")
+		cities.append("US")
 
 
 #Generate submission
